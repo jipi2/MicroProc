@@ -15,7 +15,9 @@
 #define YELLOW_LED_PIN (12) //port A
 
 uint8_t state;
-
+uint8_t flag_green = 0;
+uint8_t flag_yellow = 0;
+uint8_t flag_red = 0;
 
 void Switch_Init(void) {
 	
@@ -50,7 +52,6 @@ void Switch_Init(void) {
 	NVIC_EnableIRQ(PORTD_IRQn);
 }
 void PORTD_IRQHandler() {
-	
 	
 	// Prin utilizarea variabilei state, putem realiza un FSM
 	// si sa configuram fiecare tranzitie in parte prin 
@@ -97,6 +98,76 @@ void PORTD_IRQHandler() {
 	PORTD_ISFR = (1<<SWITCH_PIN);
 
 }
+
+void ChangeColorFromFlame(float measured_voltage)
+{
+//	GPIOB_PSOR |= (1<<RED_LED_PIN);
+//	GPIOB_PSOR |= (1<<GREEN_LED_PIN);
+		//GPIOB_PSOR |= (1<<YELLOW_LED_PIN);
+	
+	if(measured_voltage < 2.0)
+	{
+		if(flag_green == 0)
+		{	
+			GPIOB_PTOR |= (1<<GREEN_LED_PIN);
+			flag_green = 1;
+		}
+		if(flag_red == 1)
+		{
+			GPIOB_PTOR |= (1<<RED_LED_PIN);
+		}
+		if(flag_yellow == 1)
+		{
+			GPIOA_PTOR |= (1<<YELLOW_LED_PIN);
+		}
+		flag_red = 0;
+		flag_yellow = 0;
+		
+		UART0_Transmit(0x47);
+	}
+	else
+		if(measured_voltage < 4.0)
+		{
+			if(flag_yellow == 0)
+			{	
+				GPIOA_PTOR |= (1<<YELLOW_LED_PIN);
+				flag_yellow = 1;
+			}
+			if(flag_red == 1)
+			{
+				GPIOB_PTOR |= (1<<RED_LED_PIN);
+			}
+			if(flag_green == 1)
+			{
+				GPIOB_PTOR |= (1<<GREEN_LED_PIN);
+			}
+			flag_red = 0;
+			flag_green = 0;
+			
+				UART0_Transmit(0x59);
+		}
+		else
+		{
+			if(flag_red == 0)
+			{	
+				GPIOB_PTOR |= (1<<RED_LED_PIN);
+				flag_red = 1;
+			}
+			if(flag_green == 1)
+			{
+				GPIOB_PTOR |= (1<<GREEN_LED_PIN);
+			}
+			if(flag_yellow == 1)
+			{
+				GPIOA_PTOR |= (1<<YELLOW_LED_PIN);
+			}
+			flag_green = 0;
+			flag_yellow = 0;
+			
+			UART0_Transmit(0x52);
+		}
+}
+
 void RGBLed_Init(void){
 	
 	// Activarea semnalului de ceas pentru pinii folositi în cadrul led-ului RGB
@@ -112,7 +183,7 @@ void RGBLed_Init(void){
 	GPIOB_PDDR |= (1<<RED_LED_PIN);
 	
 	// Stingerea LED-ului (punerea pe 0 logic)
-	GPIOB_PSOR |= (1<<RED_LED_PIN);
+  GPIOB_PCOR |= (1<<RED_LED_PIN);
 	
 	
 	// --- GREEN LED ---
@@ -125,7 +196,7 @@ void RGBLed_Init(void){
 	GPIOB_PDDR |= (1<<GREEN_LED_PIN);
 	
 	// Stingerea LED-ului (punerea pe 0 logic)
-	GPIOB_PSOR |= (1<<GREEN_LED_PIN);
+	GPIOB_PCOR |= (1<<GREEN_LED_PIN);
 	
 	
 	
@@ -136,5 +207,5 @@ void RGBLed_Init(void){
 	GPIOA_PDDR |= (1<<YELLOW_LED_PIN);
 	
 	// Stingerea LED-ului (punerea pe 0 logic)
-	GPIOA_PSOR |= (1<<YELLOW_LED_PIN);
+	GPIOA_PCOR |= (1<<YELLOW_LED_PIN);
 }

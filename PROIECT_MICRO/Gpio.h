@@ -2,3 +2,4 @@
 void Switch_Init(void);
 void RGBLed_Init(void);
 void PORTD_IRQHandler(void);
+void ChangeColorFromFlame(float);

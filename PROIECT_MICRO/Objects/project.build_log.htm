@@ -21,24 +21,103 @@ Target DLL:      CMSIS_AGDI.dll V1.33.15.0
 Dialog DLL:      TARMCM1.DLL V1.14.6.0
  
 <h2>Project:</h2>
-D:\MICRO\folder\project.uvprojx
-Project File Date:  11/28/2023
+D:\MICRO\PROIECT_MICRO\project.uvprojx
+Project File Date:  12/07/2023
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'Target 1'
+Pit.c(1): warning: In file included from...
+./Pit.h(3): warning: // comments are not allowed in this language [-Wcomment]
+void PIT_Init(void); // Functie de initializarea a modulului periferic
+                     ^
+./Pit.h(5): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+uint8_t UTILS_PrintFlameValue(); // Functie menita sa printeze o valoare numarata in formatul MM:SS
+                             ^
+                              void
+./Pit.h(5): warning: no newline at end of file [-Wnewline-eof]
+uint8_t UTILS_PrintFlameValue(); // Functie menita sa printeze o valoare numarata in formatul MM:SS
+                                                                                                   ^
+Pit.c(2): warning: In file included from...
+./Uart.h(3): warning: // comments are not allowed in this language [-Wcomment]
+void UART0_Transmit(uint8_t data); // Functie folostia pentru a trimite un octet catre interfata UART
+                                   ^
+Pit.c(4): warning: In file included from...
+./Gpio.h(5): warning: no newline at end of file [-Wnewline-eof]
+void ChangeColorFromFlame(float);
+                                 ^
+Pit.c(6): warning: // comments are not allowed in this language [-Wcomment]
+#define LED_PIN (12) // PORT A
+                     ^
+Pit.c(21): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+  // Activarea <EE>ntreruperilor pe canalul 0
+               ^
+Pit.c(26): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+        // Activarea <EE>ntreruperii mascabile si setarea prioritatiis
+                     ^
+Pit.c(31): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+uint8_t UTILS_PrintFlameValue(){
+                             ^
+                              void
+Pit.c(43): warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]
+        uint8_t parte_fractionara2 = ((uint8_t)(measured_voltage * 100)) % 10;
+                ^
+Pit.c(31): warning: no previous prototype for function 'UTILS_PrintFlameValue' [-Wmissing-prototypes]
+uint8_t UTILS_PrintFlameValue(){
+        ^
+./Pit.h(5): note: this declaration is not a prototype; add 'void' to make it a prototype for a zero-parameter function
+uint8_t UTILS_PrintFlameValue(); // Functie menita sa printeze o valoare numarata in formatul MM:SS
+        ^
+                              void
+Pit.c(64): warning: non-void function does not return a value [-Wreturn-type]
+}
+^
+Pit.c(76): warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
+Pit.c(7): warning: no previous extern declaration for non-static variable 'timer_value' [-Wmissing-variable-declarations]
+uint32_t timer_value;
+         ^
+Pit.c(7): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+uint32_t timer_value;
+^
+Pit.c(8): warning: no previous extern declaration for non-static variable 'led_state' [-Wmissing-variable-declarations]
+uint8_t led_state;
+        ^
+Pit.c(8): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+uint8_t led_state;
+^
+15 warnings generated.
+compiling Pit.c...
+compiling system_MKL25Z4.c...
+main.c(1): warning: In file included from...
+./Gpio.h(5): warning: no newline at end of file [-Wnewline-eof]
+void ChangeColorFromFlame(float);
+                                 ^
 main.c(2): warning: In file included from...
 ./Uart.h(3): warning: // comments are not allowed in this language [-Wcomment]
 void UART0_Transmit(uint8_t data); // Functie folostia pentru a trimite un octet catre interfata UART
                                    ^
-main.c(4): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+main.c(4): warning: In file included from...
+./Pit.h(3): warning: // comments are not allowed in this language [-Wcomment]
+void PIT_Init(void); // Functie de initializarea a modulului periferic
+                     ^
+./Pit.h(5): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+uint8_t UTILS_PrintFlameValue(); // Functie menita sa printeze o valoare numarata in formatul MM:SS
+                             ^
+                              void
+./Pit.h(5): warning: no newline at end of file [-Wnewline-eof]
+uint8_t UTILS_PrintFlameValue(); // Functie menita sa printeze o valoare numarata in formatul MM:SS
+                                                                                                   ^
+main.c(6): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
 int main()
         ^
          void
-2 warnings generated.
+main.c(9): warning: // comments are not allowed in this language [-Wcomment]
+ //     Switch_Init();
+ ^
+7 warnings generated.
 compiling main.c...
-compiling system_MKL25Z4.c...
-assembling startup_MKL25Z4.s...
 Uart.c(1): warning: In file included from...
 ./Uart.h(3): warning: // comments are not allowed in this language [-Wcomment]
 void UART0_Transmit(uint8_t data); // Functie folostia pentru a trimite un octet catre interfata UART
@@ -59,6 +138,35 @@ Uart.c(44): warning: mixing declarations and code is a C99 extension [-Wdeclarat
                  ^
 5 warnings generated.
 compiling Uart.c...
+assembling startup_MKL25Z4.s...
+Adc.c(2): warning: In file included from...
+./Uart.h(3): warning: // comments are not allowed in this language [-Wcomment]
+void UART0_Transmit(uint8_t data); // Functie folostia pentru a trimite un octet catre interfata UART
+                                   ^
+Adc.c(4): warning: // comments are not allowed in this language [-Wcomment]
+#define FLAME_CHANNEL (11) // PORT C PIN 1
+                           ^
+Adc.c(6): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+void ADC0_Init() {
+              ^
+               void
+Adc.c(41): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+int ADC0_Calibrate() {
+                  ^
+                   void
+Adc.c(70): warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]
+        uint16_t calibration_var = 0x0000;
+                 ^
+Adc.c(111): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+uint16_t ADC0_Read(){
+                  ^
+                   void
+6 warnings generated.
+compiling Adc.c...
+Gpio.c(1): warning: In file included from...
+./Gpio.h(5): warning: no newline at end of file [-Wnewline-eof]
+void ChangeColorFromFlame(float);
+                                 ^
 Gpio.c(2): warning: In file included from...
 ./Uart.h(3): warning: // comments are not allowed in this language [-Wcomment]
 void UART0_Transmit(uint8_t data); // Functie folostia pentru a trimite un octet catre interfata UART
@@ -66,20 +174,44 @@ void UART0_Transmit(uint8_t data); // Functie folostia pentru a trimite un octet
 Gpio.c(4): warning: // comments are not allowed in this language [-Wcomment]
 //#define SWITCH_PIN (12) // PORT A
 ^
-Gpio.c(30): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+Gpio.c(18): warning: no previous extern declaration for non-static variable 'flag_green' [-Wmissing-variable-declarations]
+uint8_t flag_green = 0;
+        ^
+Gpio.c(18): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+uint8_t flag_green = 0;
+^
+Gpio.c(19): warning: no previous extern declaration for non-static variable 'flag_yellow' [-Wmissing-variable-declarations]
+uint8_t flag_yellow = 0;
+        ^
+Gpio.c(19): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+uint8_t flag_yellow = 0;
+^
+Gpio.c(20): warning: no previous extern declaration for non-static variable 'flag_red' [-Wmissing-variable-declarations]
+uint8_t flag_red = 0;
+        ^
+Gpio.c(20): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+uint8_t flag_red = 0;
+^
+Gpio.c(32): warning: invalid UTF-8 in comment [-Winvalid-utf8]
         // Activare <EE>ntreruperi pe rising edge
                     ^
-Gpio.c(36): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+Gpio.c(38): warning: invalid UTF-8 in comment [-Winvalid-utf8]
         // Activare <EE>ntreruperi pe rising edge
                     ^
-Gpio.c(42): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+Gpio.c(44): warning: invalid UTF-8 in comment [-Winvalid-utf8]
         // Activare <EE>ntrerupere pentru a folosi switch-u
                     ^
-Gpio.c(52): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+Gpio.c(54): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
 void PORTD_IRQHandler() {
                      ^
                       void
-Gpio.c(102): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+Gpio.c(108): warning: implicit conversion increases floating-point precision: 'float' to 'double' [-Wdouble-promotion]
+        if(measured_voltage < 2.0)
+           ^~~~~~~~~~~~~~~~ ~
+Gpio.c(129): warning: implicit conversion increases floating-point precision: 'float' to 'double' [-Wdouble-promotion]
+                if(measured_voltage < 4.0)
+                   ^~~~~~~~~~~~~~~~ ~
+Gpio.c(173): warning: invalid UTF-8 in comment [-Winvalid-utf8]
         // Activarea semnalului de ceas pentru pinii folositi <EE>n cadrul led-ului RGB
                                                               ^
 Gpio.c(17): warning: no previous extern declaration for non-static variable 'state' [-Wmissing-variable-declarations]
@@ -88,11 +220,11 @@ uint8_t state;
 Gpio.c(17): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 uint8_t state;
 ^
-8 warnings generated.
+14 warnings generated.
 compiling Gpio.c...
 linking...
-Program Size: Code=1636 RO-data=208 RW-data=0 ZI-data=360  
-".\Objects\project.axf" - 0 Error(s), 15 Warning(s).
+Program Size: Code=4056 RO-data=272 RW-data=0 ZI-data=360  
+".\Objects\project.axf" - 0 Error(s), 47 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -119,10 +251,10 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.6.0
 
    * Component: Keil::Device:Startup:2.5.0
+      Include file:  Device/Source/system_MKL25Z4.h
       Source file:   Device/Source/ARM/startup_MKL25Z4.s
       Source file:   Device/Source/system_MKL25Z4.c
-      Include file:  Device/Source/system_MKL25Z4.h
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

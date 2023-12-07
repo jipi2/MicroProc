@@ -409,6 +409,26 @@
               <FileType>5</FileType>
               <FilePath>.\Uart.h</FilePath>
             </File>
+            <File>
+              <FileName>Adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>Adc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Adc.h</FilePath>
+            </File>
+            <File>
+              <FileName>Pit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Pit.c</FilePath>
+            </File>
+            <File>
+              <FileName>Pit.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Pit.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

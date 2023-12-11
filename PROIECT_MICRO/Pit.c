@@ -28,45 +28,13 @@ void PIT_Init(void) {
 	NVIC_SetPriority(PIT_IRQn,5);
 	NVIC_EnableIRQ(PIT_IRQn);
 }
-uint8_t UTILS_PrintFlameValue(){
-	
-	uint16_t analog_input = (uint16_t) ADC0->R[0];
 
-	float measured_voltage = (analog_input * 6.0f) / 65535;
-	
-	uint8_t parte_zecimala = (uint8_t) measured_voltage;
-	uint8_t parte_fractionara1 = ((uint8_t)(measured_voltage * 10)) % 10;
-	
-	//turn on lights
-	ChangeColorFromFlame(parte_zecimala+(parte_fractionara1)/10);
-	
-	uint8_t parte_fractionara2 = ((uint8_t)(measured_voltage * 100)) % 10;
-	uint8_t parte_fractionara3 = ((uint8_t)(measured_voltage * 1000)) % 10;
-	UART0_Transmit('V');
-	UART0_Transmit('o');
-	UART0_Transmit('l');
-	UART0_Transmit('t');
-	UART0_Transmit('a');
-	UART0_Transmit('g');
-	UART0_Transmit('e');
-	UART0_Transmit(' ');
-	UART0_Transmit('=');
-	UART0_Transmit(' ');
-	UART0_Transmit(parte_zecimala + 0x30);
-	UART0_Transmit('.');
-	UART0_Transmit(parte_fractionara1 + 0x30);
-	UART0_Transmit(parte_fractionara2 + 0x30);
-	UART0_Transmit(parte_fractionara3 + 0x30);
-	UART0_Transmit('V');
-	UART0_Transmit(0x0A);
-	UART0_Transmit(0x0D);
-	
-}
 void PIT_IRQHandler(void) {
 	
 	if(PIT->CHANNEL[0].TFLG & PIT_TFLG_TIF_MASK) 
 	{
-		UTILS_PrintFlameValue();
+	  //UTILS_PrintFlameValue();
+		ChangePlacaColor();
 		PIT->CHANNEL[0].TFLG &= PIT_TFLG_TIF_MASK;
 		if(led_state) {
 			GPIOA->PCOR |= (1<<LED_PIN);

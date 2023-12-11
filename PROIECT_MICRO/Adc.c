@@ -1,7 +1,8 @@
 #include "Adc.h"
 #include "Uart.h"
+#include "Gpio.h"
 
-#define FLAME_CHANNEL (11) // PORT C PIN 1
+#define FLAME_CHANNEL (11) // PORT C PIN 2
 
 void ADC0_Init() {
 	
@@ -157,3 +158,37 @@ uint16_t ADC0_Read(){
 //	UART0_Transmit(0x0A);
 //	UART0_Transmit(0x0D);
 //}
+void UTILS_PrintFlameValue(){
+	
+	uint16_t analog_input = (uint16_t) ADC0->R[0];
+
+	float measured_voltage = (analog_input * 6.0f) / 65535;
+	
+	uint8_t parte_zecimala = (uint8_t) measured_voltage;
+	uint8_t parte_fractionara1 = ((uint8_t)(measured_voltage * 10)) % 10;
+	
+	//turn on lights
+	ChangeColorFromFlame(parte_zecimala+(parte_fractionara1)/10);
+	
+	uint8_t parte_fractionara2 = ((uint8_t)(measured_voltage * 100)) % 10;
+	uint8_t parte_fractionara3 = ((uint8_t)(measured_voltage * 1000)) % 10;
+	UART0_Transmit('V');
+	UART0_Transmit('o');
+	UART0_Transmit('l');
+	UART0_Transmit('t');
+	UART0_Transmit('a');
+	UART0_Transmit('g');
+	UART0_Transmit('e');
+	UART0_Transmit(' ');
+	UART0_Transmit('=');
+	UART0_Transmit(' ');
+	UART0_Transmit(parte_zecimala + 0x30);
+	UART0_Transmit('.');
+	UART0_Transmit(parte_fractionara1 + 0x30);
+	UART0_Transmit(parte_fractionara2 + 0x30);
+	UART0_Transmit(parte_fractionara3 + 0x30);
+	UART0_Transmit('V');
+	UART0_Transmit(0x0A);
+	UART0_Transmit(0x0D);
+	
+}

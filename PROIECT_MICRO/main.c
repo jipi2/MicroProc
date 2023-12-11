@@ -14,7 +14,10 @@ int main()
   ADC0_Init();
 	PIT_Init();
 	
-	for(;;){}
+	for(;;)
+	{
+		UTILS_PrintFlameValue();
+	}
 
 
 }

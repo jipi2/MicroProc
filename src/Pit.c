@@ -4,8 +4,7 @@
 #include "Gpio.h"
 
 #define LED_PIN (12) /*  PORT A */
-uint32_t timer_value;
-uint8_t led_state;
+static uint8_t led_state;
 
 void PIT_Init(void) {
 	

@@ -46,9 +46,10 @@ class MainWindow(QMainWindow):
         tertiary_layout.addWidget(control_panel_box,5)
                 
         self.plot_widget = pg.PlotWidget()
-        self.second = [1,2,3,4,5]
+        
+        self.second = [i for i in range(1,26)]
         self.flameValues = []
-        for i in range(5):
+        for i in range(25):
             self.flameValues.append(getValueFromSensor())
                 
         self.color_ranges = [(0, 2.0, 'g'), (2.0, 4.0, 'y'), (4.0, 6.0, 'r')]
@@ -75,7 +76,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.uptdatePlot)
-        self.timer.start(1000) 
+        self.timer.start(250) 
         
     def send_input(self):
         sendValueToMCN('c')

@@ -3,21 +3,25 @@
 #include "Adc.h"
 #include "Pit.h"
 
-uint8_t flag = 0;
+static uint8_t flag = 0;
 
-void changeLedSeq(void)
+char changeLedSeq(void);
+
+char changeLedSeq(void)
 {
 	if(UART0->S1 & UART0_S1_RDRF_MASK) 
 	{
-		char c = UART0->D;
+		char c;
+		c = UART0->D;
 		if(flag == 0)
 			flag = 1;
 		else
 			flag = 0;
 		ledDirection = flag;
+		return c;
 	}
 	else
-		return;
+		return 'c';
 }
 
 int main(void)

@@ -15,11 +15,11 @@
 #define PLACA_GREEN_LED_PIN (19) /* PORT B */
 #define PLACA_BLUE_LED_PIN (1) /* PORT D */
 
-uint8_t stateR = 0;
-uint8_t stateL = 0; 
-uint8_t flag_green = 0;
-uint8_t flag_yellow = 0;
-uint8_t flag_red = 0;
+static uint8_t stateR = 0;
+static uint8_t stateL = 0; 
+static uint8_t flag_green = 0;
+static uint8_t flag_yellow = 0;
+static uint8_t flag_red = 0;
 volatile uint8_t ledDirection = 0;
 
 void RGBLed_Init(void){

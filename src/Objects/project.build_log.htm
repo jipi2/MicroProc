@@ -21,100 +21,22 @@ Target DLL:      CMSIS_AGDI.dll V1.33.15.0
 Dialog DLL:      TARMCM1.DLL V1.14.6.0
  
 <h2>Project:</h2>
-D:\MICRO\GitFolder\PROIECT_MICRO\project.uvprojx
+D:\MICRO\GitFolder\src\project.uvprojx
 Project File Date:  12/07/2023
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'Target 1'
-main.c(1): warning: In file included from...
-./Gpio.h(7): warning: no newline at end of file [-Wnewline-eof]
-volatile extern uint8_t ledDirection;
-                                     ^
-main.c(6): warning: no previous extern declaration for non-static variable 'flag' [-Wmissing-variable-declarations]
-uint8_t flag = 0;
-        ^
-main.c(6): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-uint8_t flag = 0;
-^
-main.c(12): warning: unused variable 'c' [-Wunused-variable]
-                char c = UART0->D;
-                     ^
-main.c(8): warning: no previous prototype for function 'changeLedSeq' [-Wmissing-prototypes]
-void changeLedSeq(void)
-     ^
-main.c(8): note: declare 'static' if the function is not intended to be used outside of this translation unit
-void changeLedSeq(void)
-^
-static 
-4 warnings generated.
-compiling main.c...
-assembling startup_MKL25Z4.s...
-Pit.c(4): warning: In file included from...
-./Gpio.h(7): warning: no newline at end of file [-Wnewline-eof]
-volatile extern uint8_t ledDirection;
-                                     ^
-Pit.c(7): warning: no previous extern declaration for non-static variable 'timer_value' [-Wmissing-variable-declarations]
-uint32_t timer_value;
-         ^
-Pit.c(7): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-uint32_t timer_value;
-^
-Pit.c(8): warning: no previous extern declaration for non-static variable 'led_state' [-Wmissing-variable-declarations]
-uint8_t led_state;
-        ^
-Pit.c(8): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-uint8_t led_state;
-^
-3 warnings generated.
-compiling Pit.c...
-Adc.c(3): warning: In file included from...
-./Gpio.h(7): warning: no newline at end of file [-Wnewline-eof]
-volatile extern uint8_t ledDirection;
-                                     ^
-1 warning generated.
-compiling Adc.c...
-compiling Uart.c...
-Gpio.c(1): warning: In file included from...
-./Gpio.h(7): warning: no newline at end of file [-Wnewline-eof]
-volatile extern uint8_t ledDirection;
-                                     ^
-Gpio.c(18): warning: no previous extern declaration for non-static variable 'stateR' [-Wmissing-variable-declarations]
-uint8_t stateR = 0;
-        ^
-Gpio.c(18): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-uint8_t stateR = 0;
-^
-Gpio.c(19): warning: no previous extern declaration for non-static variable 'stateL' [-Wmissing-variable-declarations]
-uint8_t stateL = 0; 
-        ^
-Gpio.c(19): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-uint8_t stateL = 0; 
-^
-Gpio.c(20): warning: no previous extern declaration for non-static variable 'flag_green' [-Wmissing-variable-declarations]
-uint8_t flag_green = 0;
-        ^
-Gpio.c(20): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-uint8_t flag_green = 0;
-^
-Gpio.c(21): warning: no previous extern declaration for non-static variable 'flag_yellow' [-Wmissing-variable-declarations]
-uint8_t flag_yellow = 0;
-        ^
-Gpio.c(21): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-uint8_t flag_yellow = 0;
-^
-Gpio.c(22): warning: no previous extern declaration for non-static variable 'flag_red' [-Wmissing-variable-declarations]
-uint8_t flag_red = 0;
-        ^
-Gpio.c(22): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-uint8_t flag_red = 0;
-^
-6 warnings generated.
-compiling Gpio.c...
 compiling system_MKL25Z4.c...
+compiling Gpio.c...
+assembling startup_MKL25Z4.s...
+compiling main.c...
+compiling Pit.c...
+compiling Uart.c...
+compiling Adc.c...
 linking...
-Program Size: Code=4308 RO-data=272 RW-data=0 ZI-data=368  
-".\Objects\project.axf" - 0 Error(s), 14 Warning(s).
+Program Size: Code=4324 RO-data=272 RW-data=0 ZI-data=368  
+".\Objects\project.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 

@@ -5,9 +5,9 @@
 
 static uint8_t flag = 0;
 
-char changeLedSeq(void);
+char changeLedSeqDir(void);
 
-char changeLedSeq(void)
+char changeLedSeqDir(void)
 {
 	if(UART0->S1 & UART0_S1_RDRF_MASK) 
 	{
@@ -36,10 +36,11 @@ int main(void)
   PIT_Init();
 	
 	for(;;)
-	{
-				changeLedSeq();
-				
-				measured_voltage = (analog_input * 6.0f) / 65535;
+	{		
+		changeLedSeqDir();		
+		if(readyToTransmit == 1)
+		{
+				measured_voltage = (analog_input * 5.0f) / 65535;
 				
 				parte_zecimala = (uint8_t) measured_voltage;
 				parte_fractionara1 = ((uint8_t)(measured_voltage * 10)) % 10;
@@ -62,6 +63,7 @@ int main(void)
 				UART0_Transmit(0x0D);
 				
 				readyToTransmit = 0;
+			}
 		}
 }
 

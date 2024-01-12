@@ -1,8 +1,6 @@
 #include "Gpio.h"
 #include "Uart.h"
 
-#define SWITCH_PIN (4) /* PORT D */
-
 #define RED_LED_PIN (3) /* PORT B */
 
 #define GREEN_LED_PIN (1) /* PORT B */
@@ -15,13 +13,11 @@
 #define PLACA_GREEN_LED_PIN (19) /* PORT B */
 #define PLACA_BLUE_LED_PIN (1) /* PORT D */
 
-static uint8_t stateR = 0;
-static uint8_t stateL = 0; 
 static uint8_t flag_green = 0;
 static uint8_t flag_yellow = 0;
 static uint8_t flag_red = 0;
 volatile uint8_t ledDirection = 0;
-
+static uint8_t state = 0;
 void RGBLed_Init(void){
 	
 /* Activarea semnalului de ceas pentru pinii folositi in cadrul led-ului RGB */
@@ -72,7 +68,7 @@ void RGBLed_Init(void){
 		/* Configurare pin pe post de output */
 	GPIOB_PDDR |= (1<<PLACA_RED_LED_PIN);
 	
-	/* Stingerea LED-ului (punerea pe 0 logic) */
+	/* Stingerea LED-ului (punerea pe 1 logic) */
 	GPIOB_PSOR |= (1<<PLACA_RED_LED_PIN);
 	
 	/* ----- GREEN --- */
@@ -82,7 +78,7 @@ void RGBLed_Init(void){
 		/* Configurare pin pe post de output */
 	GPIOB_PDDR |= (1<<PLACA_GREEN_LED_PIN);
 	
-	/* Stingerea LED-ului (punerea pe 0 logic) */ 
+	/* Stingerea LED-ului (punerea pe 1 logic) */ 
 	GPIOB_PSOR |= (1<<PLACA_GREEN_LED_PIN);
 	
 	/* ---- BLUE ---- */
@@ -92,107 +88,65 @@ void RGBLed_Init(void){
 		/* Configurare pin pe post de output */
 	GPIOD_PDDR |= (1<<PLACA_BLUE_LED_PIN);
 	
-	/* Stingerea LED-ului (punerea pe 0 logic) */
+	/* Stingerea LED-ului (punerea pe 1 logic) */
 	GPIOD_PSOR |= (1<<PLACA_BLUE_LED_PIN);
-	stateR = 0;
-	stateL = 5;
 }
 
+void black(void)
+{
+	GPIOB_PSOR |= (1<<PLACA_GREEN_LED_PIN);
+	GPIOB_PSOR |= (1<<PLACA_RED_LED_PIN);
+	GPIOD_PSOR |= (1<<PLACA_BLUE_LED_PIN);
+}
 
 void ChangePlacaColor(void)
 {
-	if (ledDirection == 0)
-	{
-		if(stateL != 5)
+		if(state == 0)
 		{
-			GPIOB_PSOR |= (1<<PLACA_GREEN_LED_PIN);
-			GPIOB_PSOR |= (1<<PLACA_RED_LED_PIN);
-			GPIOD_PSOR |= (1<<PLACA_BLUE_LED_PIN);
-			stateR = 0;
-			stateL = 5;
-		}
-		if(stateR == 0)
-		{
-			/*turn on all leds */
+			black();
 			GPIOB_PTOR |= (1<<PLACA_GREEN_LED_PIN);
 			GPIOB_PTOR |= (1<<PLACA_RED_LED_PIN);
 			GPIOD_PTOR |= (1<<PLACA_BLUE_LED_PIN);
 			
-			stateR = 1;
-		}
-		else if(stateR == 1)
-		{
-			/* turn off red and blue*/
-			GPIOB_PTOR |= (1<<PLACA_RED_LED_PIN);
-			GPIOD_PTOR |= (1<<PLACA_BLUE_LED_PIN);
+			if(ledDirection == 0)
+				state = 1;	
+			else
+				state = 3;
 			
-			stateR = 2;
 		}
-		else if (stateR == 2)
+		else if(state == 1)
 		{
-			/* turn on red*/
+			black();
+			GPIOB_PTOR |= (1<<PLACA_GREEN_LED_PIN);
+			if(ledDirection == 0)
+				state = 2;
+		else
+					
+				state = 0;
+		}
+		else if (state == 2)
+		{
+			black();
 			GPIOB_PTOR |= (1<<PLACA_RED_LED_PIN);
-		
-			stateR = 3;
+			GPIOB_PTOR |= (1<<PLACA_GREEN_LED_PIN);
+			if(ledDirection == 0)
+				state = 3;
+			else		
+				state = 1;
 		}
 		else
 		{
-			/* turn off red and green*/
-			GPIOB_PTOR |= (1<<PLACA_GREEN_LED_PIN);
-			GPIOB_PTOR |= (1<<PLACA_RED_LED_PIN);
-			
-			stateR = 0;
-
+			black();
+			if(ledDirection == 0)
+				state = 0;
+			else
+				state = 2;
 		}
-	}
-	else
-	{
-		if(stateR != 5)
-		{
-			GPIOB_PSOR |= (1<<PLACA_GREEN_LED_PIN);
-			GPIOB_PSOR |= (1<<PLACA_RED_LED_PIN);
-			GPIOD_PSOR |= (1<<PLACA_BLUE_LED_PIN);
-			
-			stateL = 0;
-			stateR = 5;
-		}
-		if(stateL == 0)
-		{
-			GPIOB_PSOR |= (1<<PLACA_GREEN_LED_PIN);
-			GPIOB_PSOR |= (1<<PLACA_RED_LED_PIN);
-			GPIOD_PSOR |= (1<<PLACA_BLUE_LED_PIN);
-			
-			stateL = 1;
-		}
-		else if (stateL == 1)
-		{
-			/* turn on*/
-			GPIOB_PTOR |= (1<<PLACA_GREEN_LED_PIN);
-			GPIOB_PTOR |= (1<<PLACA_RED_LED_PIN);
-			
-			stateL=2;
-		}
-		else if (stateL == 2)
-		{
-			/* turn off*/
-			GPIOB_PTOR |= (1<<PLACA_RED_LED_PIN);
-			
-			stateL =3; 
-		}
-		else 
-		{
-			/* turn on*/
-			GPIOB_PTOR |= (1<<PLACA_RED_LED_PIN);
-			GPIOD_PTOR |= (1<<PLACA_BLUE_LED_PIN);
-			
-			stateL = 0;
-		}
-	}
 }
 
 void ChangeColorFromFlame(float measured_voltage)
 {	
-	if(measured_voltage < 2.0f)
+	if(measured_voltage < 1.66f)
 	{
 		if(flag_green == 0)
 		{	
@@ -212,7 +166,7 @@ void ChangeColorFromFlame(float measured_voltage)
 		
 	}
 	else
-		if(measured_voltage < 4.0f)
+		if(measured_voltage < 3.32f)
 		{
 			if(flag_yellow == 0)
 			{	

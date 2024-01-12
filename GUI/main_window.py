@@ -47,12 +47,12 @@ class MainWindow(QMainWindow):
                 
         self.plot_widget = pg.PlotWidget()
         
-        self.second = [i for i in range(1,26)]
+        self.second = [i for i in range(0,25)]
         self.flameValues = []
         for i in range(25):
             self.flameValues.append(getValueFromSensor())
                 
-        self.color_ranges = [(0, 2.0, 'g'), (2.0, 4.0, 'y'), (4.0, 6.0, 'r')]
+        self.color_ranges = [(0, 1.66, 'g'), (1.66, 3.32, 'y'), (3.32, 5.0, 'r')]
 
         brush_colors = []
         for value in self.flameValues:
@@ -64,6 +64,7 @@ class MainWindow(QMainWindow):
         
         bars = pg.BarGraphItem(x=self.second, height=self.flameValues, width=0.5, brushes=brush_colors)
         self.plot_widget.addItem(bars)
+        self.plot_widget.setYRange(0,5)
                                 
         secondary_layout.addWidget(self.plot_widget, 3)                                 
         
@@ -95,3 +96,4 @@ class MainWindow(QMainWindow):
         bars = pg.BarGraphItem(x=self.second, height=self.flameValues, width=0.5, brushes=brush_colors)
         self.plot_widget.clear()
         self.plot_widget.addItem(bars)
+        self.plot_widget.setYRange(0,5)

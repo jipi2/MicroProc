@@ -3,9 +3,6 @@
 #include "Adc.h"
 #include "Gpio.h"
 
-#define LED_PIN (12) /*  PORT A */
-static uint8_t led_state;
-
 void PIT_Init(void) {
 	
 	/*  Activarea semnalului de ceas pentru perifericul PIT*/
@@ -15,7 +12,7 @@ void PIT_Init(void) {
 	/*  Oprirea decrementarii valorilor numaratoarelor in modul debug*/
 	PIT->MCR |= PIT_MCR_FRZ_MASK;
 	/*  Setarea valoarea numaratorului de pe canalul 0 la o perioada de 1 secunda*/
-	PIT->CHANNEL[0].LDVAL = 0x3F3332;
+	PIT->CHANNEL[0].LDVAL = 0x3F3332;  /* in decimal: 4 141 874, pt 395 ms */  
 	
   /*  Activarea intreruperilor pe canalul 0*/
 	PIT->CHANNEL[0].TCTRL |= PIT_TCTRL_TIE_MASK;
@@ -35,9 +32,5 @@ void PIT_IRQHandler(void) {
 	{
 		ChangePlacaColor();
 		PIT->CHANNEL[0].TFLG &= PIT_TFLG_TIF_MASK;
-		if(led_state) {
-			GPIOA->PCOR |= (1<<LED_PIN);
-			led_state = 0;
-		}
 	}
 }
